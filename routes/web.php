@@ -17,9 +17,7 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/subjects', function () {
-    return view('subjects');
-});
+Route::get('/subjects', 'SubjectController@index');
 
 Route::get('/schoolworks', function () {
     return view('schoolworks');

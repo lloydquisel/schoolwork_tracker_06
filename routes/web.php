@@ -18,6 +18,9 @@ Route::get('/', function () {
 });
 
 Route::get('/subjects', 'SubjectController@index');
+Route::get('/subjects/create', 'SubjectController@create');
+Route::get('/subjects/{id}', 'SubjectController@show');
+
 
 Route::get('/schoolworks', function () {
     return view('schoolworks');

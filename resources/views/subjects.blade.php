@@ -23,31 +23,13 @@
             <table class="table">
                 <thead class="thead-light">
                     <tr>
-                        <th scope="col">Code</th>
                         <th scope="col">Name</th>
                         <th scope="col">Description</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>CIS2202</td>
-                        <td>Web Development</td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</td>
-                        <td>
-                            <a href="" class="btn btn-info">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Cis2111</td>
-                        <td>sdsadsa</td>
-                        <td>ssss</td>
-                        <td>
-                            <a href="" class="btn btn-info">Edit</a>
-                            <a href="" class="btn btn-danger">Delete</a>
-                        </td>
-                    </tr>
+                   
                 </tbody>
             </table>
         </div>

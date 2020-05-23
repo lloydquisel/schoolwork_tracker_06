@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>SchoolWork Tracker</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -15,7 +15,7 @@
     </head>
     <body class="mb-5">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand h1" href="#">SchoolWork Tracker</a>
+            <a class="navbar-brand h1" href="/">SchoolWork Tracker</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -24,7 +24,7 @@
 
         @yield('content')
 
-        <footer class="position-absolute w-100" >
+        <footer class="position-absolute w-100">
             <div class="text-center p-3 bg-light text-dark">
                 © 2020 Copyright
             </div>

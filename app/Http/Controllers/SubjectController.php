@@ -24,4 +24,22 @@ class SubjectController extends Controller
     public function create() {
         return view('subjects.create');
     }
+
+    public function store() {
+        $subject = new Subject();
+
+        $subject->name = request('name');
+        $subject->description = request('description');
+
+        $subject->save();
+
+        return redirect('/subjects')->with('mssg', 'success');
+    }
+
+    public function destroy($id) {
+        $subject = Subject::findOrFail($id);
+        $subject->delete();
+
+        return redirect('/subjects')->with('mssg', 'danger');
+    }
 }

@@ -84,7 +84,7 @@
                     <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="">
+                <form action="/subjects">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="formGroupExampleInput">Username</label>

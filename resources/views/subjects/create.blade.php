@@ -16,7 +16,21 @@
         </div>
     @endif
     <div class="container h-100">
-        <h1 class="d-inline display-4">Create A New Subject</h1>
+        <h1 class="display-4">Create A New Subject</h1>
+        <div class="container w-50 mw-25">
+            <form action="/subjects" method="POST">
+                @csrf
+                <div class="form-group">
+                    <label for="name">Subject Name:</label>
+                    <input class="form-control" type="text" name="name" id="name">
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea class="form-control" name="description" id="description"></textarea>
+                </div>
+                <button class="btn btn-success" type="submit">Create</button>
+            </form>
+        </div>
     </div>
 </div>
 @endsection  

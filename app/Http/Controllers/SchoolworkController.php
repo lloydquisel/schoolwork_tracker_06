@@ -10,10 +10,16 @@ class SchoolworkController extends Controller
 {
     public function index() {
         $subjects = Subject::all();
-        // $schoolworks = Schoolwork::all();
-        $schoolworks = Schoolwork::orderBy('deadline')->get();
 
-        return view('schoolworks.index', ['schoolworks' => $schoolworks, 'subjects' => $subjects]);
+        // $schoolworks = Schoolwork::all();
+        $schoolworks = Schoolwork::where('status', '=', '0')->orderBy('deadline')->get();
+        $submittedworks = Schoolwork::where('status', '=', '1')->orderBy('date_submitted')->get();
+
+        return view('schoolworks.index', [
+            'schoolworks' => $schoolworks, 
+            'subjects' => $subjects, 
+            'submittedworks' => $submittedworks
+        ]);
     }
 
     public function store() {
@@ -23,6 +29,24 @@ class SchoolworkController extends Controller
         $schoolwork->subject_id = request('subject_id');
         $schoolwork->deadline = request('deadline');
         $schoolwork->status = false;
+
+        $schoolwork->save();
+
+        return redirect('/schoolworks');
+    }
+
+    public function destroy($id) {
+        $schoolwork = Schoolwork::findOrFail($id);
+        $schoolwork->delete();
+
+        return redirect('/schoolworks');
+    }
+
+    public function update($id) {
+        $schoolwork = Schoolwork::findOrFail($id);
+
+        $schoolwork->date_submitted = date('m/d/Y');
+        $schoolwork->status = true;
 
         $schoolwork->save();
 

@@ -81,18 +81,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- @for($i = 0; $i < 5; $i++)
-                    <tr>
-                        <td>{{ $i }}</td>
-                        <td>{{ $i }}</td>
-                    </tr>
-                    @endfor -->
-                    <!-- @for($i = 0; $i < count($subjects); $i++)
-                        <tr>
-                            <td>{{ $subjects[$i]['name'] }}</td>
-                            <td>{{ $subjects[$i]['description'] }}</td>
-                        </tr>
-                    @endfor -->
                     @foreach($subjects as $subject) 
                         <tr>
                             <td>{{ $subject->name }}</td>
@@ -137,7 +125,7 @@
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">You are trying to delete a subject</h5>
+                                                    <h5 class="modal-title text-danger" id="exampleModalLabel">You are trying to delete a subject</h5>
                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                     </button>

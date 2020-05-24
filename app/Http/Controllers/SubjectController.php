@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subject;
+use App\Schoolwork;
 
 class SubjectController extends Controller
 {
@@ -33,6 +34,8 @@ class SubjectController extends Controller
     }
 
     public function destroy($id) {
+        Schoolwork::where('subject_id', '=', $id)->delete();
+
         $subject = Subject::findOrFail($id);
         $subject->delete();
 

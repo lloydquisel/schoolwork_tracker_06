@@ -42,18 +42,19 @@
 
         <h1 class="d-inline display-4">Schoolworks Management</h1>
         <a class="btn btn-success btn-lg text-white float-right d-inline mt-3 mr-5" type="button" data-toggle="modal" data-target="#createModal">New Schoolwork</a>
-        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        @if(count($subjects) > 0)
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="creatSchoolwork" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Create a New Schoolwork</h5>
+                        <h5 class="modal-title" id="createSchoolwork">Create a New Schoolwork</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form action="/schoolworks" method="POST">
+                        @csrf
                         <div class="modal-body">
-                            @csrf
                             <div class="form-group">
                                 <label for="name">Description:</label>
                                 <input class="form-control" type="text" name="description" id="description">
@@ -80,6 +81,28 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="creatSchoolwork" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title text-danger" id="createSchoolwork">No Subjects Yet!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>You have to create first a subject in the Subject Management page to classify your schoolwork.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <a href="/subjects" class="btn btn-primary">Okay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        @if(count($schoolworks) > 0)
         <div class="mt-4">
             <table class="table">
                 <thead class="thead-light">
@@ -87,6 +110,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Subject</th>
                         <th scope="col">Deadline</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -95,7 +119,11 @@
                         $currentDate = date('m/d/Y');
                     @endphp
                     @foreach($schoolworks as $schoolwork) 
+                        @if($currentDate > $schoolwork->deadline)
+                        <tr class="table-danger text-danger">
+                        @else
                         <tr>
+                        @endif
                             <td>{{ $schoolwork->description }}</td>
                             <td>@foreach($subjects as $subject)
                                     @if($schoolwork->subject_id == $subject->id)
@@ -103,34 +131,30 @@
                                     @endif
                                 @endforeach
                             </td>
-                            @if($currentDate > $schoolwork->deadline)
-                            <td class="text-danger font-weight-bold">
-                                {{ $schoolwork->deadline }}
-                            </td>
-                            @else
-                            <td >
-                                {{ $schoolwork->deadline }}
-                            </td>
-                            @endif
+                            <td >{{ $schoolwork->deadline }}</td>
+                            <td>{{ $schoolwork->status }}</td>
                             <td>
-                                
-                                    <a href="" class="btn btn-info">Edit</a>
-                                <form class="d-inline" action="/subjects/{{ $subject->id }}" method="POST">
+                                <form class="d-inline" action="/schoolworks/{{ $schoolwork->id }}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button class="btn btn-info" type="submit">Submit</button>
+                                </form>
+                                <form class="d-inline" action="/schoolworks/{{ $schoolwork->id }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <a class="btn btn-danger text-white" type="button" data-toggle="modal" data-target="#deleteModal">Delete</a>
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">You are trying to delete a subject</h5>
+                                                <h5 class="modal-title text-danger" id="deleteModalLabel">You are trying to delete a schoolwork!</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Are you sure you want to delete this subject?</p>
-                                                <p>All the schoolworks related to this subject will also be deleted.</p>
+                                                <p>You haven't submitted this schoolwork yet.</p>
+                                                <p>Are you sure you want to delete this item?</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
@@ -146,6 +170,45 @@
                 </tbody>
             </table>
         </div>
+        @endif
+        @if(count($submittedworks) > 0)
+            <div class="mt-3">
+                <h3 class="mt-2 pt-3 border border-top-primary border-right-0 border-bottom-0 border-left-0">Submitted Schoolworks</h3>
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">Description</th>
+                            <th scope="col">Subject</th>
+                            <th scope="col">Date Submitted</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($submittedworks as $submittedwork)
+                        <tr>
+                            <td>{{ $submittedwork->description }}</td>
+                            <td>@foreach($subjects as $subject)
+                                    @if($submittedwork->subject_id == $subject->id)
+                                        {{ $subject->name }}
+                                    @endif
+                                @endforeach
+                            </td>
+                            <td>{{ $submittedwork->date_submitted }}</td>
+                            <td>{{ $submittedwork->status }}</td>
+                            <td>
+                                <form class="d-inline" action="/schoolworks/{{ $submittedwork->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        @endif
     </div>
 </div>
 @endsection

@@ -154,4 +154,16 @@
         </div>
     </div>
 </div>
-@endsection  
+<footer class="position-absolute w-100">
+    <div class="text-center p-3 bg-light text-dark">
+        © 2020 Copyright
+    </div>
+</footer>
+@endsection
+@section('script')
+<script>
+    $( function() {
+        $( "#datepicker" ).datepicker();
+    } );
+</script>
+@endsection

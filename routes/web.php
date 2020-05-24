@@ -23,6 +23,5 @@ Route::get('/subjects/{id}', 'SubjectController@show');
 Route::delete('/subjects/{id}', 'SubjectController@destroy');
 Route::patch('/subjects/{id}', 'SubjectController@update');
 
-
-
 Route::get('/schoolworks', 'SchoolworkController@index');
+Route::post('/schoolworks', 'SchoolworkController@store');

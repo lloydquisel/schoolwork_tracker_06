@@ -17,8 +17,8 @@ class CreateSchoolworksTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('description');
-            $table->date('deadline');
-            $table->date('date_submitted');
+            $table->string('deadline');
+            $table->string('date_submitted');
             $table->boolean('status'); //0 if not yet submitted and 1 if already submitted
             $table->foreignId('subject_id')->constrained();
         });

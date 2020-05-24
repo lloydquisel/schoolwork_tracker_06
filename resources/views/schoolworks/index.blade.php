@@ -41,8 +41,45 @@
         @endif
 
         <h1 class="d-inline display-4">Schoolworks Management</h1>
-        <a href="/subjects/create" class="btn btn-success btn-lg float-right d-inline mt-3 mr-5">New Schoolwork</a>
-        
+        <a class="btn btn-success btn-lg text-white float-right d-inline mt-3 mr-5" type="button" data-toggle="modal" data-target="#createModal">New Schoolwork</a>
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Create a New Schoolwork</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/schoolworks" method="POST">
+                        <div class="modal-body">
+                            @csrf
+                            <div class="form-group">
+                                <label for="name">Description:</label>
+                                <input class="form-control" type="text" name="description" id="description">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject_id">Select Subject:</label>
+                                <select id="subject_id" name="subject_id" class="form-control">
+                                    <option value="0" selected>...</option>
+                                    @foreach($subjects as $subject)
+                                        <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="deadline">Deadline:</label>
+                                <input type="text" class="form-control" name="deadline" id="datepicker" placeholder="MM/DD/YYYY">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="mt-4">
             <table class="table">
                 <thead class="thead-light">
@@ -55,7 +92,7 @@
                 </thead>
                 <tbody>
                     @php
-                        $currentDate = date('Y/m/d');
+                        $currentDate = date('m/d/Y');
                     @endphp
                     @foreach($schoolworks as $schoolwork) 
                         <tr>
@@ -67,7 +104,7 @@
                                 @endforeach
                             </td>
                             @if($currentDate > $schoolwork->deadline)
-                            <td class="text-danger">
+                            <td class="text-danger font-weight-bold">
                                 {{ $schoolwork->deadline }}
                             </td>
                             @else
@@ -111,7 +148,14 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
 <script>
+    $( function() {
+        $( "#datepicker" ).datepicker({
+            minDate: new Date()
+        });
+    });
     document.addEventListener("click", function(){
         document.getElementById("alert").style.display = "none";
     });

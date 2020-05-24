@@ -21,10 +21,6 @@ class SubjectController extends Controller
         return view('subjects.show', ['subject' => $subject]);
     }
 
-    public function create() {
-        return view('subjects.create');
-    }
-
     public function store() {
         $subject = new Subject();
 
@@ -41,5 +37,16 @@ class SubjectController extends Controller
         $subject->delete();
 
         return redirect('/subjects')->with('mssg', 'danger');
+    }
+
+    public function update($id) {
+        $subject = Subject::findOrFail($id);
+
+        $subject->name = request('name');
+        $subject->description = request('description');
+
+        $subject->save();
+
+        return redirect('/subjects');
     }
 }

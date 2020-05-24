@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubjectsTable extends Migration
+class CreateSchoolworksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateSubjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('schoolworks', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name');
             $table->string('description');
-            $table->foreignId('user_id')->constrained();
+            $table->date('deadline');
+            $table->date('date_submitted');
+            $table->boolean('status'); //0 if not yet submitted and 1 if already submitted
+            $table->foreignId('subject_id')->constrained();
         });
     }
 
@@ -29,6 +31,6 @@ class CreateSubjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('schoolworks');
     }
 }

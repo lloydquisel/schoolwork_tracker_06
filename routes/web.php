@@ -18,13 +18,11 @@ Route::get('/', function () {
 });
 
 Route::get('/subjects', 'SubjectController@index');
-Route::get('/subjects/create', 'SubjectController@create');
 Route::post('/subjects', 'SubjectController@store');
 Route::get('/subjects/{id}', 'SubjectController@show');
 Route::delete('/subjects/{id}', 'SubjectController@destroy');
+Route::patch('/subjects/{id}', 'SubjectController@update');
 
 
 
-Route::get('/schoolworks', function () {
-    return view('schoolworks');
-});
+Route::get('/schoolworks', 'SchoolworkController@index');

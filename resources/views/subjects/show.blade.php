@@ -34,7 +34,6 @@
         <h2>Subject Name - {{ $subject->name }}</h2>
         <br>
         <p>Description: {{ $subject->description }}</p>
-        
     </div>
 </div>
 @endsection  

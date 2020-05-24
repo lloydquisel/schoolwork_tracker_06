@@ -41,8 +41,36 @@
         @endif
 
         <h1 class="d-inline display-4">Subjects Management</h1>
-        <a href="/subjects/create" class="btn btn-success btn-lg float-right d-inline mt-3 mr-5">New Subject</a>
-        
+        <a class="btn btn-success btn-lg text-white float-right d-inline mt-3 mr-5" type="button" data-toggle="modal" data-target="#createModal">New Subject</a>
+        <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">You are trying to delete a subject</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/subjects" method="POST">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Subject Name:</label>
+                            <input class="form-control" type="text" name="name" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description:</label>
+                            <textarea class="form-control" name="description" id="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success">Create</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
         <div class="mt-4">
             <table class="table">
                 <thead class="thead-light">
@@ -70,29 +98,58 @@
                             <td>{{ $subject->name }}</td>
                             <td>{{ $subject->description }}</td>
                             <td>
-                                
-                                    <a href="" class="btn btn-info">Edit</a>
                                 <form class="d-inline" action="/subjects/{{ $subject->id }}" method="POST">
                                     @csrf
-                                    @method('DELETE')
-                                    <a class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteModal">Delete</a>
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    @method('PATCH')
+                                    <a class="btn btn-info text-white" type="button" data-toggle="modal" data-target="#editModal">Edit</a>
+                                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">You are trying to delete a subject</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">Updating a subject:</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Are you sure you want to delete this subject?</p>
-                                                <p>All the schoolworks related to this subject will also be deleted.</p>
+                                                <div class="form-group">
+                                                    <label for="name">Subject Name:</label>
+                                                    <input type="text" name="name" id="name" class="form-control" value="{{ $subject->name }}">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="description">Description</label>
+                                                    <textarea type="text" name="description" id="description" class="form-control">{{ $subject->description }}</textarea>
+                                                </div>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-info">Edit</button>
                                             </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <form class="d-inline" action="/subjects/{{ $subject->id }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <a class="btn btn-danger text-white" type="button" data-toggle="modal" data-target="#deleteModal">Delete</a>
+                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">You are trying to delete a subject</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete this subject?</p>
+                                                    <p>All the schoolworks related to this subject will also be deleted.</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

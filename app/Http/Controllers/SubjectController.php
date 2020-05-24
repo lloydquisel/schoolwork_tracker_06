@@ -8,6 +8,10 @@ use App\Schoolwork;
 
 class SubjectController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index() {
         $subjects = Subject::all();
         // $subjects = Subject::orderby('name', 'desc')->get();

@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
 @section('navcontent')
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -15,20 +15,6 @@
 
 @section('content')
 <div>
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-    
     <div class="container h-100 mt-2">
         @if(session('mssg') == "danger")
             <div id="alert" class="alert alert-danger text-center" role="alert">
@@ -150,6 +136,8 @@
         </div>
     </div>
 </div>
+@endsection
+@section('script')
 <script>
     document.addEventListener("click", function(){
         document.getElementById("alert").style.display = "none";

@@ -1,157 +1,90 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 
-@section('navcontent')
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="#">About</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Team</a>
-        </li>
-    </ul>
-    <a href="" class="btn btn-outline-dark mr-2" data-toggle="modal" data-target="#loginModal">Log In</a>
-    <a href="" class="btn btn-secondary" data-toggle="modal" data-target="#signupModal">Register</a>
-</div>
+@section('links')
+<li class="nav-item">
+    <a class="nav-link" href="/home">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/subjects">Subjects</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/schoolworks">Schoolworks</a>
+</li>
 @endsection
 
 @section('content')
 <div class="bg-dark text-white">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-
-    <div class="d-inline-block w-45 ml-5">
-        <div class="m-5 text-center">
-            <h1 class="display-3">Schoolwork Tracker</h1>
+    <div class="d-inline-block w-50 ml-5">
+        <div class="text-center">
+            <h1 class="display-4">Schoolwork Tracker</h1>
             <p class="lead">An app for students</p>
             <div>
                 
             </div>
         </div>
     </div>
-    <div class="d-inline-block w-45 m-5">
-        <form class="bg-light text-dark p-4 rounded">
-            <div class="form-row">
-                <div class="col from-group">
-                    <label for="">First Name</label>
-                    <input type="text" class="form-control" placeholder="First name">
+    <div class="d-inline-block w-25 m-5 bg-light text-dark rounded p-4">
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+
+            <div class="form-group row ">
+                <label for="name" class="col-md-6 col-form-label text-md-right">{{ __('Name') }}</label>
+
+                <div class="col-md-6">
+                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                    @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
-                <div class="col form-group">
-                    <label for="">Last Name</label>
-                    <input type="text" class="form-control" placeholder="Last name">
+            </div>
+
+            <div class="form-group row">
+                <label for="email" class="col-md-6 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                <div class="col-md-6">
+                    <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
             </div>
-            <div class="form-group">
-                <label for="formGroupExampleInput">Username</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Username">
+
+            <div class="form-group row">
+                <label for="password" class="col-md-6 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                <div class="col-md-6">
+                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                    @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
             </div>
-            <div class="form-group">
-                <label for="formGroupExampleInput">Password</label>
-                <input type="password" class="form-control" id="formGroupExampleInput" placeholder="Password">
+
+            <div class="form-group row">
+                <label for="password-confirm" class="col-md-6 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+
+                <div class="col-md-6">
+                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                </div>
             </div>
-            <div class="form-group">
-                <label for="datepicker">Birthdate</label>
-                <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
+
+            <div class="form-group row mb-0">
+                <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary btn-block py-4">
+                        {{ __('Sign Up for Schoolwork Tracker') }}
+                    </button>
+                </div>
             </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                <label class="form-check-label" for="inlineRadio1">Male</label>
-            </div>
-            <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                <label class="form-check-label" for="inlineRadio2">Female</label>
-            </div>
-            <button type="submit" class="d-block btn btn-primary btn-block my-2 py-3">Sign Up for Schoolwork Tracker</button>
         </form>
-    </div>
-    <div class="modal fade text-dark" id="loginModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Log In</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="/subjects">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Username</label>
-                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Username">
-                        </div>
-                        <div class="form-group">
-                            <label for="formGroupExampleInput">Password</label>
-                            <input type="password" class="form-control" id="formGroupExampleInput" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="Submit" class="btn btn-primary">Log In</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade text-dark" id="signupModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Sign Up</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form class="">
-                    <div class="modal-body">
-                            <div class="form-row">
-                                <div class="col from-group">
-                                    <label for="">First Name</label>
-                                    <input type="text" class="form-control" placeholder="First name">
-                                </div>
-                                <div class="col form-group">
-                                    <label for="">Last Name</label>
-                                    <input type="text" class="form-control" placeholder="Last name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Username</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Username">
-                            </div>
-                            <div class="form-group">
-                                <label for="formGroupExampleInput">Password</label>
-                                <input type="password" class="form-control" id="formGroupExampleInput" placeholder="Password">
-                            </div>
-                            <div class="form-group">
-                                <label for="datepicker">Birthdate</label>
-                                <input type="text" class="form-control" id="datepicker" placeholder="MM/DD/YYYY">
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                <label class="form-check-label" for="inlineRadio1">Male</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                <label class="form-check-label" for="inlineRadio2">Female</label>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Sign Up</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
 </div>
 <footer class="position-absolute w-100">

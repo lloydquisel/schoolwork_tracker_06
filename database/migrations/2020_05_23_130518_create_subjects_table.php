@@ -18,7 +18,7 @@ class CreateSubjectsTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('description');
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('user_id');
         });
     }
 

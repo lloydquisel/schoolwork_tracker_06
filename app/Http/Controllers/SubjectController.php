@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Subject;
+use App\User;
 use App\Schoolwork;
 
 class SubjectController extends Controller
@@ -13,12 +14,15 @@ class SubjectController extends Controller
     }
 
     public function index() {
-        $subjects = Subject::all();
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+
+        // $subjects = Subject::orderBy('created_at', 'desc')->get();
         // $subjects = Subject::orderby('name', 'desc')->get();
         // $subjects = Subject::latest();
         // $subjects = Subject::where('name', 'CIS 2202')->get();
 
-        return view('subjects.index', ['subjects' => $subjects]);
+        return view('subjects.index', ['subjects' => $user->subjects]);
     }
 
     public function show($id) {
@@ -31,8 +35,9 @@ class SubjectController extends Controller
 
         $subject->name = request('name');
         $subject->description = request('description');
+        $subject->user_id = auth()->user()->id;
 
-        $subject->save();
+        $subject->save();    
 
         return redirect('/subjects')->with('mssg', 'success');
     }

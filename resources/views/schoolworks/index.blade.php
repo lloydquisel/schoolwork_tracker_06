@@ -24,7 +24,6 @@
                 A new subject was added!
             </div>
         @endif
-
         <h1 class="d-inline display-4">Schoolworks Management</h1>
         <a class="btn btn-success btn-lg text-white float-right d-inline mt-3 mr-5" type="button" data-toggle="modal" data-target="#createModal">New Schoolwork</a>
         @if(count($subjects) > 0)
@@ -37,25 +36,34 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="{{ route('schoolworks.store') }}" method="POST">
+                    <form class="needs-validation" action="{{ route('schoolworks.store') }}" method="POST" novalidate>
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="name">Description:</label>
-                                <input class="form-control" type="text" name="description" id="description">
+                                <input class="form-control" type="text" name="description" id="description" required>
+                                <div class="invalid-feedback">
+                                    This field is required.
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="subject_id">Select Subject:</label>
-                                <select id="subject_id" name="subject_id" class="form-control">
-                                    <option value="0" selected>...</option>
+                                <select id="subject_id" name="subject_id" class="form-control" required>
+                                    <option value="" selected></option>
                                     @foreach($subjects as $subject)
                                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                     @endforeach
                                 </select>
+                                <div class="invalid-feedback">
+                                    Please select a subject.
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="deadline">Deadline:</label>
-                                <input type="text" class="form-control" name="deadline" id="datepicker" placeholder="MM/DD/YYYY">
+                                <input type="text" class="form-control" name="deadline" id="datepicker" placeholder="MM/DD/YYYY" required>
+                                <div class="invalid-feedback">
+                                    A deadline is required.
+                                </div>
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -95,7 +103,6 @@
                         <th scope="col">Description</th>
                         <th scope="col">Subject</th>
                         <th scope="col">Deadline</th>
-                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
@@ -105,7 +112,7 @@
                     @endphp
                     @foreach($schoolworks as $schoolwork) 
                         @if($currentDate > $schoolwork->deadline)
-                        <tr class="table-danger text-danger">
+                        <tr class="text-danger">
                         @else
                         <tr>
                         @endif
@@ -117,7 +124,6 @@
                                 @endforeach
                             </td>
                             <td >{{ $schoolwork->deadline }}</td>
-                            <td>{{ $schoolwork->status }}</td>
                             <td>
                                 <form class="d-inline" action="{{ route('schoolworks.update', $schoolwork->id) }}" method="POST">
                                     @csrf
@@ -165,7 +171,6 @@
                             <th scope="col">Description</th>
                             <th scope="col">Subject</th>
                             <th scope="col">Date Submitted</th>
-                            <th scope="col">Status</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -180,7 +185,6 @@
                                 @endforeach
                             </td>
                             <td>{{ $submittedwork->date_submitted }}</td>
-                            <td>{{ $submittedwork->status }}</td>
                             <td>
                                 <form class="d-inline" action="{{ route('schoolworks.destroy', $submittedwork->id) }}" method="POST">
                                     @csrf

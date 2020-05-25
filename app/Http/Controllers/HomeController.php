@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use App\Schoolwork;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $currentDate = date('m/d/Y');
+
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+        $schoolworks = Schoolwork::where(['status' => '0', 'user_id' => $user_id])->orderBy('deadline')->get();
+        $deadlines = Schoolwork::where([
+            ['status','=', '0'], 
+            ['user_id', '=', $user_id], 
+            ['deadline', '<', $currentDate],
+            ['status', '=', '0']
+        ])->orderBy('deadline')->get();
+        
+        return view('home', [
+            'schoolworks' => $schoolworks,
+            'deadlines' => $deadlines
+        ]);
     }
 }

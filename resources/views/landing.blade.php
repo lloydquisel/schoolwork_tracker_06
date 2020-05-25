@@ -2,17 +2,18 @@
 
 @section('links')
 <li class="nav-item">
-    <a class="nav-link" href="/home">Home</a>
+    <a class="nav-link" href="{{ route('home') }}">Home</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/subjects">Subjects</a>
+    <a class="nav-link" href="{{ route('subjects.index') }}">Subjects</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="/schoolworks">Schoolworks</a>
+    <a class="nav-link" href="{{ route('schoolworks.index') }}">Schoolworks</a>
 </li>
 @endsection
 
 @section('content')
+@guest
 <div class="bg-dark text-white">
     <div class="d-inline-block w-50 ml-5">
         <div class="text-center">
@@ -87,6 +88,19 @@
         </form>
     </div>
 </div>
+@else
+<div class="bg-dark text-white">
+    <div class="p-5">
+        <div class="text-center">
+            <h1 class="display-4">Schoolwork Tracker</h1>
+            <p class="lead">An app for students</p>
+            <div>
+                ,ashhdskahdsaklh
+            </div>
+        </div>
+    </div>
+</div
+@endguest
 <footer class="position-absolute w-100">
     <div class="text-center p-3 bg-light text-dark">
         © 2020 Copyright

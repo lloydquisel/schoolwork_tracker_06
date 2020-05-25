@@ -1,16 +1,15 @@
 @extends('layouts.app')
 
-@section('navcontent')
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/subjects">Subjects</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/schoolworks">SchoolWorks</a>
-        </li>
-    </ul>
-</div>
+@section('links')
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('home') }}">Home</a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{{ route('subjects.index') }}">Subjects</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('schoolworks.index') }}">Schoolworks</a>
+</li>
 @endsection
 
 @section('content')
@@ -37,7 +36,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/subjects" method="POST">
+                    <form action="{{ route('subjects.store') }}" method="POST">
                         <div class="modal-body">
                             @csrf
                             <div class="form-group">
@@ -72,12 +71,12 @@
                             <td>{{ $subject->name }}</td>
                             <td>{{ $subject->description }}</td>
                             <td>
-                                <form class="d-inline" action="/subjects/{{ $subject->id }}" method="POST">
+                                <form class="d-inline" action="{{ route('subjects.update', $subject->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <a class="btn btn-info text-white" type="button" data-toggle="modal" data-target="#editModal">Edit</a>
-                                    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
+                                    <a class="btn btn-info text-white" type="button" data-toggle="modal" data-target="#editModal{{ $subject->id }}">Edit</a>
+                                    <div class="modal fade" id="editModal{{ $subject->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">  
                                             <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="exampleModalLabel">Updating a subject:</h5>
@@ -97,17 +96,17 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-info">Edit</button>
+                                                <button type="submit" class="btn btn-info text-white">Edit</button>
                                             </div>
                                             </div>
                                         </div>
                                     </div>
                                 </form>
-                                <form class="d-inline" action="/subjects/{{ $subject->id }}" method="POST">
+                                <form class="d-inline" action="{{ route('subjects.destroy', $subject->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn btn-danger text-white" type="button" data-toggle="modal" data-target="#deleteModal">Delete</a>
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <a class="btn btn-danger text-white" type="button" data-toggle="modal" data-target="#deleteModal{{ $subject->id }}">Delete</a>
+                                    <div class="modal fade" id="deleteModal{{ $subject->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">

@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('links')
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('home') }}">Home</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{{ route('subjects.index') }}">Subjects</a>
+</li>
+<li class="nav-item active">
+    <a class="nav-link" href="{{ route('schoolworks.index') }}">Schoolworks</a>
+</li>
+@endsection
+
 @section('content')
 <div>
     <div class="container h-100 mt-2">
@@ -25,7 +37,7 @@
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form action="/schoolworks" method="POST">
+                    <form action="{{ route('schoolworks.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="form-group">
@@ -107,16 +119,16 @@
                             <td >{{ $schoolwork->deadline }}</td>
                             <td>{{ $schoolwork->status }}</td>
                             <td>
-                                <form class="d-inline" action="/schoolworks/{{ $schoolwork->id }}" method="POST">
+                                <form class="d-inline" action="{{ route('schoolworks.update', $schoolwork->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button class="btn btn-info" type="submit">Submit</button>
+                                    <button class="btn btn-info text-white" type="submit">Submit</button>
                                 </form>
-                                <form class="d-inline" action="/schoolworks/{{ $schoolwork->id }}" method="POST">
+                                <form class="d-inline" action="{{ route('schoolworks.destroy', $schoolwork->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <a class="btn btn-danger text-white" type="button" data-toggle="modal" data-target="#deleteModal">Delete</a>
-                                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <a class="btn btn-danger text-white" type="button" data-toggle="modal" data-target="#deleteModal{{ $schoolwork->id }}">Delete</a>
+                                    <div class="modal fade" id="deleteModal{{ $schoolwork->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
                                             <div class="modal-header">
@@ -170,7 +182,7 @@
                             <td>{{ $submittedwork->date_submitted }}</td>
                             <td>{{ $submittedwork->status }}</td>
                             <td>
-                                <form class="d-inline" action="/schoolworks/{{ $submittedwork->id }}" method="POST">
+                                <form class="d-inline" action="{{ route('schoolworks.destroy', $submittedwork->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>

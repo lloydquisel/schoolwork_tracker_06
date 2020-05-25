@@ -17,16 +17,16 @@ Route::get('/', function () {
     return view('landing');
 });
 
-Route::get('/subjects', 'SubjectController@index');
-Route::post('/subjects', 'SubjectController@store');
-Route::get('/subjects/{id}', 'SubjectController@show');
-Route::delete('/subjects/{id}', 'SubjectController@destroy');
-Route::patch('/subjects/{id}', 'SubjectController@update');
+Route::get('/subjects', 'SubjectController@index')->name('subjects.index');
+Route::post('/subjects', 'SubjectController@store')->name('subjects.store');
+Route::get('/subjects/{id}', 'SubjectController@show')->name('subjects.show');
+Route::delete('/subjects/{id}', 'SubjectController@destroy')->name('subjects.destroy');
+Route::patch('/subjects/{id}', 'SubjectController@update')->name('subjects.update');
 
-Route::get('/schoolworks', 'SchoolworkController@index');
-Route::post('/schoolworks', 'SchoolworkController@store');
-Route::delete('/schoolworks/{id}', 'SchoolworkController@destroy');
-Route::patch('/schoolworks/{id}', 'SchoolworkController@update');
+Route::get('/schoolworks', 'SchoolworkController@index')->name('schoolworks.index');
+Route::post('/schoolworks', 'SchoolworkController@store')->name('schoolworks.store');
+Route::delete('/schoolworks/{id}', 'SchoolworkController@destroy')->name('schoolworks.destroy');
+Route::patch('/schoolworks/{id}', 'SchoolworkController@update')->name('schoolworks.update');
 
 
 Auth::routes();

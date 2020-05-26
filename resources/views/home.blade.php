@@ -30,7 +30,7 @@
             </div>
         </div>
         @if(count($deadlines) > 0)
-            <div class="card">
+            <div class="card mt-2">
                 <div class="card-header">
                     Beyond Deadlines
                 </div>

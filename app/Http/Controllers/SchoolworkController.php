@@ -28,6 +28,8 @@ class SchoolworkController extends Controller
         ]);
     }
 
+    
+
     public function store() {
         $schoolwork = new Schoolwork();
         

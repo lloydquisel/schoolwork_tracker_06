@@ -24,8 +24,10 @@
                 A new subject was added!
             </div>
         @endif
-        <h1 class="d-inline display-4">Schoolworks Management</h1>
-        <a class="btn btn-success btn-lg text-white float-right d-inline mt-3 mr-5" type="button" data-toggle="modal" data-target="#createModal">New Schoolwork</a>
+        <div class="border-bottom border-secondary pb-3 pt-2 mb-3">
+            <h1 class="d-inline display-5 ml-2">Schoolworks Management</h1>
+            <a class="btn btn-success btn-lg text-white float-right d-inline mb-2 mr-2" type="button" data-toggle="modal" data-target="#createModal">New Schoolwork</a>
+        </div>    
         @if(count($subjects) > 0)
         <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="creatSchoolwork" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -89,14 +91,18 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <a href="/subjects" class="btn btn-primary">Okay</a>
+                        <a href="/subjects" class="btn btn-primary">Create a Subject</a>
                     </div>
                 </div>
             </div>
         </div>
         @endif
-        @if(count($schoolworks) > 0)
-        <div class="mt-4">
+        @if(count($schoolworks) < 1)
+            <div class="ml-3">
+                <h2><small class="text-muted">You have no pending schoolwork.</small></h2>
+            </div>
+        @else
+        <div class="mt-4 px-2">
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -163,7 +169,7 @@
         </div>
         @endif
         @if(count($submittedworks) > 0)
-            <div class="mt-3">
+            <div class="mt-3 px-2">
                 <h3 class="mt-2 pt-3 border border-top-primary border-right-0 border-bottom-0 border-left-0">Submitted Schoolworks</h3>
                 <table class="table">
                     <thead class="thead-light">

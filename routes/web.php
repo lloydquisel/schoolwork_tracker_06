@@ -28,7 +28,6 @@ Route::post('/schoolworks', 'SchoolworkController@store')->name('schoolworks.sto
 Route::delete('/schoolworks/{id}', 'SchoolworkController@destroy')->name('schoolworks.destroy');
 Route::patch('/schoolworks/{id}', 'SchoolworkController@update')->name('schoolworks.update');
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

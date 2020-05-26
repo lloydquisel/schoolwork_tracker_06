@@ -61,4 +61,5 @@ class SubjectController extends Controller
 
         return redirect('/subjects');
     }
+
 }

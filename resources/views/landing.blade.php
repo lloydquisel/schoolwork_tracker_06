@@ -11,7 +11,7 @@
 
 @section('content')
 @guest
-<div class="row w-100 px-0 text-white" style="background-color: #154042;">
+<div class="row w-100 px-0 text-white" style="background-color: #11201e;">
     <div class="col-sm mx-5 p-3">
         <div class="text-center">
             <img src="img/icon.png" width="250" height="250" alt="">

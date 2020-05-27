@@ -2,9 +2,6 @@
 
 @section('links')
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('home') }}">Home</a>
-</li>
-<li class="nav-item">
     <a class="nav-link" href="{{ route('subjects.index') }}">Subjects</a>
 </li>
 <li class="nav-item active">
@@ -47,7 +44,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="name">Description:</label>
-                                <input class="form-control" type="text" name="description" id="description" required>
+                                <input class="form-control" type="text" name="description" id="description" placeholder="Description" required>
                                 <div class="invalid-feedback">
                                     This field is required.
                                 </div>
@@ -55,7 +52,7 @@
                             <div class="form-group">
                                 <label for="subject_id">Select Subject:</label>
                                 <select id="subject_id" name="subject_id" class="form-control" required>
-                                    <option value="" selected></option>
+                                    <option value="" disabled selected>Select a Subject</option>
                                     @foreach($subjects as $subject)
                                         <option value="{{ $subject->id }}">{{ $subject->name }}</option>
                                     @endforeach
@@ -113,7 +110,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Subject</th>
                         <th scope="col">Deadline</th>
-                        <th scope="col">Action</th>
+                        <th scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,7 +135,7 @@
                                 <form class="d-inline" action="{{ route('schoolworks.update', $schoolwork->id) }}" method="POST">
                                     @csrf
                                     @method('PATCH')
-                                    <button class="btn btn-info text-white" type="submit">Submit</button>
+                                    <button class="btn btn-info text-white" type="submit">Done</button>
                                 </form>
                                 <form class="d-inline" action="{{ route('schoolworks.destroy', $schoolwork->id) }}" method="POST">
                                     @csrf
@@ -180,6 +177,7 @@
                         <tr>
                             <th scope="col">Description</th>
                             <th scope="col">Subject</th>
+                            <th scope="col">Deadline</th>
                             <th scope="col">Date Submitted</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -194,6 +192,7 @@
                                     @endif
                                 @endforeach
                             </td>
+                            <td>{{ $submittedwork->deadline }}</td>
                             <td>{{ $submittedwork->date_submitted }}</td>
                             <td>
                                 <form class="d-inline" action="{{ route('schoolworks.destroy', $submittedwork->id) }}" method="POST">

@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('links')
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('home') }}">Home</a>
-</li>
 <li class="nav-item active">
     <a class="nav-link" href="{{ route('subjects.index') }}">Subjects</a>
 </li>

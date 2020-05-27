@@ -2,9 +2,6 @@
 
 @section('links')
 <li class="nav-item">
-    <a class="nav-link" href="{{ route('home') }}">Home</a>
-</li>
-<li class="nav-item">
     <a class="nav-link" href="{{ route('subjects.index') }}">Subjects</a>
 </li>
 <li class="nav-item">
@@ -14,7 +11,7 @@
 
 @section('content')
 @guest
-<div class="row w-100 px-0 bg-dark text-white">
+<div class="row w-100 px-0 text-white" style="background-color: #154042;">
     <div class="col-sm mx-5 p-3">
         <div class="text-center">
             <img src="img/icon.png" width="250" height="250" alt="">
@@ -99,7 +96,7 @@
     </div>
 </div>
 @else
-<div class="bg-dark text-white">
+<div class="text-white" style="background-color: #11201e;">
     <div class="p-5">
         <div class="text-center">
             <img src="img/icon.png" width="300" height="300" alt="">
@@ -110,33 +107,19 @@
     </div>
 </div>
 @endguest
-<div class="bg-white py-5 border-bottom">
+<div class="py-5 border-bottom" style="background-color: #dfdbd8;">
     <div class="container">
         <div class="row">
-            <div class="col-sm border-right">
-                <div class="mx-auto pt-4" style="width:40%;">
-                    <h5 class="text-secondary">Shows the number of pending schoolworks and the schoolworks that are beyond the deadline.</h5>
-                </div>
-            </div>
-            <div class="col-sm">
-                <div class="text-center">
-                    <img src="img/dashboardicon.png" width="200" alt="" style="opacity:0.3;">
-                    <h3 class="text-secondary mt-2">Dashboard</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="bg-light py-5 border-bottom">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm text-center border-right">
-                <img src="img/subjecticon.png" width="200" alt="" style="opacity:0.3;">
-                <h3 class="text-secondary mt-2">Subject Management</h3>
+            <div class="col-sm text-center border-right border-secondary">
+                <span class="mb-0" style="font-size: 8em; color: #154042;">
+                    <i class="fas fa-book"></i>
+                </span>
+                <!-- <img src="img/subjecticon.png" width="200" alt="" style="opacity:0.3;"> -->
+                <h3 class="mt-0" style="color: #154042;">Subject Management</h3>
             </div>
             <div class="col-sm">
                 <div class="mx-auto pt-5" style="width:40%;">
-                    <h5 class="text-secondary">
+                    <h5 class="" style="color: #154042;">
                         Allows students to enter their subjects and can also edit and delete their entries.
                     </h5>
                 </div>
@@ -144,25 +127,28 @@
         </div>
     </div>
 </div>
-<div class="bg-white py-5 border-bottom">
+<div class="py-5 border-bottom" style="background-color: #d5e9dd;">
 `   <div class="container">
         <div class="row">
-            <div class="col-sm border-right">
+            <div class="col-sm border-right border-secondary">
                 <div class="mx-auto pt-3" style="width:40%;">
-                    <h5 class="text-secondary">
+                    <h5 class="" style="color: #154042;">
                         Allows students to enter their schoolworks in their corresponding subjects. Shows pending, submitted, and beyond the deadline schoolworks.
                     </h5>
                 </div>
             </div>
             <div class="col-sm text-center">
-                <img src="img/schoolworkicon.png" width="200" alt="" style="opacity:0.3;">
-                <h3 class="text-secondary mt-2">Schoolwork Management</h3>
+                <span class="mb-0" style="font-size: 8em; color: #154042;">
+                    <i class="fas fa-file-alt"></i>
+                </span>
+                <!-- <img src="img/schoolworkicon.png" width="200" alt="" style="opacity:0.3;"> -->
+                <h3 class="mt-0" style="color: #154042;">Schoolwork Management</h3>
             </div>
         </div>
     </div>
 </div>
-<footer class="position-absolute w-100">
-    <div class="text-center p-3 bg-light text-dark">
+<footer class="position-absolute w-100 bg-light" style="height: 100px">
+    <div class="text-center p-4 mt-3 text-dark">
         © 2020 Copyright:
         <a class="d-inline text-dark text-decoration-none" href="/">Schoolwork Tracker</a>
     </div>

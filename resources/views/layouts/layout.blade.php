@@ -23,6 +23,8 @@
     <!-- JQuery CSS -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/5ea943976c.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">

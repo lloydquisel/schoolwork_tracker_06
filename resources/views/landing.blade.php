@@ -12,7 +12,7 @@
 @section('content')
 @guest
 <div class="row w-100 px-0 text-white" style="background-color: #11201e;">
-    <div class="col-sm mx-5 p-3">
+    <div class="col-sm-6 mx-5 p-3">
         <div class="text-center">
             <img src="img/icon.png" width="250" height="250" alt="">
             <h1 class="display-4 mb-0">Schoolwork Tracker</h1>
@@ -22,14 +22,14 @@
             </div>
         </div>
     </div>
-    <div class="col-sm m-5 p-5 bg-light text-dark rounded">
+    <div class="col-sm-4 m-5 p-5 bg-light text-dark rounded">
         <form class="needs-validation" method="POST" action="{{ route('register') }}" novalidate>
             @csrf
 
             <div class="form-group row ">
-                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                <label for="name" class="col-md-6 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                     <div class="invalid-feedback">
                         This field is required.
@@ -43,9 +43,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <label for="email" class="col-md-6 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                     <div class="invalid-feedback">
                         This field is required.
@@ -59,9 +59,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                <label for="password" class="col-md-6 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
                     <div class="invalid-feedback">
                         This field is required.
@@ -75,9 +75,9 @@
             </div>
 
             <div class="form-group row">
-                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                <label for="password-confirm" class="col-md-6 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                     <div class="invalid-feedback">
                         This field is required.

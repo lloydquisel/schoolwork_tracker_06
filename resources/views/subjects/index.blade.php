@@ -23,6 +23,10 @@
             <div id="alert" class="alert alert-success text-center" role="alert">
                 A new subject was added!
             </div>
+        @elseif(session('mssg') == "edit")
+            <div id="alert" class="alert alert-info text-center" role="alert">
+                A subject was successfully updated!
+            </div>
         @endif
         <div class="border-bottom border-secondary pb-3 pt-2 mb-3">
             <h1 class="d-inline display-5 ml-2">Subjects Management</h1>

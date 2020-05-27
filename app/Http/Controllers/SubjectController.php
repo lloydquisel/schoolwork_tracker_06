@@ -25,11 +25,6 @@ class SubjectController extends Controller
         return view('subjects.index', ['subjects' => $user->subjects]);
     }
 
-    public function show($id) {
-        $subject = Subject::findOrFail($id);
-        return view('subjects.show', ['subject' => $subject]);
-    }
-
     public function store() {
         $subject = new Subject();
 
@@ -59,7 +54,7 @@ class SubjectController extends Controller
 
         $subject->save();
 
-        return redirect('/subjects');
+        return redirect('/subjects')->with('mssg', 'edit');
     }
 
 }

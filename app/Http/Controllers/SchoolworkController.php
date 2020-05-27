@@ -28,8 +28,6 @@ class SchoolworkController extends Controller
         ]);
     }
 
-    
-
     public function store() {
         $schoolwork = new Schoolwork();
         
@@ -41,7 +39,7 @@ class SchoolworkController extends Controller
 
         $schoolwork->save();
 
-        return redirect('/schoolworks');
+        return redirect('/schoolworks')->with('mssg', 'success');
     }
     
     public function update($id) {
@@ -52,13 +50,13 @@ class SchoolworkController extends Controller
 
         $schoolwork->save();
 
-        return redirect('/schoolworks');
+        return redirect('/schoolworks')->with('mssg', 'submit');
     }
 
     public function destroy($id) {
         $schoolwork = Schoolwork::findOrFail($id);
         $schoolwork->delete();
 
-        return redirect('/schoolworks');
+        return redirect('/schoolworks')->with('mssg', 'danger');
     }
 }

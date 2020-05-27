@@ -17,11 +17,15 @@
     <div class="container h-100 mt-2">
         @if(session('mssg') == "danger")
             <div id="alert" class="alert alert-danger text-center" role="alert">
-                A subject was deleted!
+                A schoolwork was deleted!
             </div>
         @elseif(session('mssg') == "success")
             <div id="alert" class="alert alert-success text-center" role="alert">
-                A new subject was added!
+                A new schoolwork was added!
+            </div>
+        @elseif(session('mssg') == "submit")
+            <div id="alert" class="alert alert-success text-center" role="alert">
+                A schoolwork was submitted!
             </div>
         @endif
         <div class="border-bottom border-secondary pb-3 pt-2 mb-3">

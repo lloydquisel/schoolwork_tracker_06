@@ -14,27 +14,29 @@
 
 @section('content')
 @guest
-<div class="bg-dark text-white">
-    <div class="d-inline-block w-50 ml-5">
+<div class="row w-100 px-0 bg-dark text-white">
+    <div class="col-sm mx-5 p-3">
         <div class="text-center">
             <img src="img/icon.png" width="250" height="250" alt="">
-            <h1 class="display-4">Schoolwork Tracker</h1>
-            <p class="lead">An app for students</p>
+            <h1 class="display-4 mb-0">Schoolwork Tracker</h1>
+            <h3 class="text-muted border-bottom pb-3">- Optimize, one at a time -</h3>
+            <p class="lead">An app for students that allows them to track their schoolworks</p>
             <div>
-                
             </div>
         </div>
     </div>
-    <div class="d-inline-block w-25 m-5 bg-light text-dark rounded p-4">
-        <form method="POST" action="{{ route('register') }}">
+    <div class="col-sm m-5 p-5 bg-light text-dark rounded">
+        <form class="needs-validation" method="POST" action="{{ route('register') }}" novalidate>
             @csrf
 
             <div class="form-group row ">
-                <label for="name" class="col-md-6 col-form-label text-md-right">{{ __('Name') }}</label>
+                <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -44,11 +46,13 @@
             </div>
 
             <div class="form-group row">
-                <label for="email" class="col-md-6 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -58,11 +62,13 @@
             </div>
 
             <div class="form-group row">
-                <label for="password" class="col-md-6 col-form-label text-md-right">{{ __('Password') }}</label>
+                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -72,10 +78,13 @@
             </div>
 
             <div class="form-group row">
-                <label for="password-confirm" class="col-md-6 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                    <div class="invalid-feedback">
+                        This field is required.
+                    </div>
                 </div>
             </div>
 
@@ -94,8 +103,9 @@
     <div class="p-5">
         <div class="text-center">
             <img src="img/icon.png" width="300" height="300" alt="">
-            <h1 class="display-3">Schoolwork Tracker</h1>
-            <p class="lead">An app for students</p>
+            <h1 class="display-3 mb-0">Schoolwork Tracker</h1>
+            <h3 class="text-muted border-bottom pb-3 w-50 mx-auto">- Optimize, one at a time -</h3>
+            <p class="lead">An app for students that allows them to track their schoolworks.</p>
         </div>
     </div>
 </div>
